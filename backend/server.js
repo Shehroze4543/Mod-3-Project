@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const mongoose = require("mongoose");
 const mealsRoutes = require("./routes/meals");
 
 // express app
@@ -17,7 +18,15 @@ app.use((req, res, next) => {
 //   res.json({ mssg: `Welcome to the app` });
 // });
 app.use("/api/meals", mealsRoutes);
-// listen for requests
-app.listen(process.env.PORT, () => {
-  console.log(`LISTENING ON PORT 3080`);
-});
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    // listen for requests
+    app.listen(process.env.PORT, () => {
+      console.log(`CONNECTED TO DB & LISTENING ON PORT 3080`);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
