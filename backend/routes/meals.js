@@ -1,29 +1,27 @@
 const express = require("express");
-
+const Meal = require("../models/mealModel");
+const {
+  createMeal,
+  getMeal,
+  getMeals,
+  deleteMeal,
+  updateMeal,
+} = require("../controllers/mealController");
 const router = express.Router();
 
 // GET ALL MEALS
-router.get("/", (req, res) => {
-  res.json({ mssg: "GET ALL MEALS" });
-});
+router.get("/", getMeals);
 
 // GET A SINGLE MEAL
-router.get("/:id", (req, res) => {
-  res.json({ mssg: "GET a single meal" });
-});
+router.get("/:id", getMeal);
 
 // POST A NEW MEAL
-router.post("/", (req, res) => {
-  res.json({ mssg: "POST a single meal" });
-});
+router.post("/", createMeal);
 
-// DELETE A  MEAL
-router.delete("/:id", (req, res) => {
-  res.json({ mssg: "DELETE a meal" });
-});
+// DELETE A SINGLE MEAL
+router.delete("/:id", deleteMeal);
 
-// UPDATE A NEW MEAL
-router.patch("/:id", (req, res) => {
-  res.json({ mssg: "UPDATE a meal" });
-});
+// UPDATE A SINGLE MEAL
+router.patch("/:id", updateMeal);
+
 module.exports = router;
