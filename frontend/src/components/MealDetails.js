@@ -15,7 +15,7 @@ const MealDetails = ({ meal }) => {
         {meal.fats}
       </p>
       <p>
-        <strong>Total Calories::</strong>
+        <strong>Total Calories:</strong>
         {meal.calories}
       </p>
     </div>

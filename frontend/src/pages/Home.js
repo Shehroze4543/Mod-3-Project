@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 // components
 import MealDetails from "../components/MealDetails";
+import MealForm from "../components/MealForm";
 const Home = () => {
   const [meals, setMeals] = useState(null);
 
@@ -18,6 +19,8 @@ const Home = () => {
   }, []);
   return (
     <div className="home">
+      <MealForm />
+
       <div className="meals">
         {meals &&
           meals.map((meal) => {
