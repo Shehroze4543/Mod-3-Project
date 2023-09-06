@@ -1,14 +1,19 @@
 import { useEffect } from "react";
 import { useMealsContext } from "../hooks/useMealsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 // components
 import MealDetails from "../components/MealDetails";
 import MealForm from "../components/MealForm";
 const Home = () => {
   //const [meals, setMeals] = useState(null);
   const { meals, dispatch } = useMealsContext();
+  const { user } = useAuthContext();
   useEffect(() => {
     const fetchMeals = async () => {
-      const response = await fetch("/api/meals");
+      const response = await fetch("/api/meals", {
+        headers: { Authorization: `Bearer ${user.token}` },
+      });
+
       const json = await response.json();
 
       if (response.ok) {
@@ -16,8 +21,10 @@ const Home = () => {
         dispatch({ type: "SET_MEALS", payload: json });
       }
     };
-    fetchMeals();
-  }, [dispatch, meals]);
+    if (user) {
+      fetchMeals();
+    }
+  }, [dispatch, meals, user]);
   return (
     <>
       <div className="home">

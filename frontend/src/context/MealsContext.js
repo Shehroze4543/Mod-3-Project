@@ -10,6 +10,7 @@ export const mealsReducer = (state, action) => {
       };
     case "CREATE_MEAL":
       return {
+        // meals: [action.payload, ...state.meals],
         meals: [action.payload, ...state.meals],
       };
     case "DELETE_MEAL":

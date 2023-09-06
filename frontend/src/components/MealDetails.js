@@ -1,11 +1,20 @@
 import { useMealsContext } from "../hooks/useMealsContext";
 
+import { useAuthContext } from "../hooks/useAuthContext";
+
 const MealDetails = ({ meal }) => {
   const { dispatch } = useMealsContext();
+  const { user } = useAuthContext();
 
   const handleClick = async () => {
+    if (!user) {
+      return;
+    }
     const response = await fetch("/api/meals/" + meal._id, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
     });
     const json = await response.json();
 
@@ -33,9 +42,7 @@ const MealDetails = ({ meal }) => {
         <strong>Total Calories:</strong>
         {meal.calories}
       </p>
-      <span>
-       
-      </span>
+      <span></span>
       <button onClick={handleClick}>delete</button>
     </div>
   );
