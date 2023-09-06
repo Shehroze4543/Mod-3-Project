@@ -1,1 +1,13 @@
-
+div.error {
+  padding: 10px;
+  background: white;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+  border: 5px solid red;
+  width: fit-content;
+}
+input.error {
+  border: 2px solid red;
+}

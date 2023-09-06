@@ -32,6 +32,25 @@ const createMeal = async (req, res) => {
   const { mealName, protein, carbs, fats } = req.body;
   const calories = calculateTotalCalories(protein, carbs, fats);
 
+  let emptyFields = [];
+  if (!mealName) {
+    emptyFields.push("Name");
+  }
+  if (!protein) {
+    emptyFields.push("Protein");
+  }
+  if (!carbs) {
+    emptyFields.push("Carbs");
+  }
+  if (!fats) {
+    emptyFields.push("Fats");
+  }
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: "Please fill in all the fields", emptyFields });
+  }
+
   try {
     const meal = await Meal.create({
       mealName,
