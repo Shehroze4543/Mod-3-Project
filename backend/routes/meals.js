@@ -1,5 +1,5 @@
 const express = require("express");
-const Meal = require("../models/mealModel");
+//const Meal = require("../models/mealModel");
 const {
   createMeal,
   getMeal,
