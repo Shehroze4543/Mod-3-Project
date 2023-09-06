@@ -1,4 +1,5 @@
 import { useMealsContext } from "../hooks/useMealsContext";
+
 const MealDetails = ({ meal }) => {
   const { dispatch } = useMealsContext();
 
@@ -12,6 +13,7 @@ const MealDetails = ({ meal }) => {
       dispatch({ type: "DELETE_MEAL", payload: json });
     }
   };
+
   return (
     <div className="meal-details">
       <h4>{meal.mealName}</h4>
@@ -31,6 +33,9 @@ const MealDetails = ({ meal }) => {
         <strong>Total Calories:</strong>
         {meal.calories}
       </p>
+      <span>
+       
+      </span>
       <button onClick={handleClick}>delete</button>
     </div>
   );
