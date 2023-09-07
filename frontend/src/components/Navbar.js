@@ -15,7 +15,7 @@ const Navbar = () => {
    
         <div className="header1"> 
           <Link to="/">
-          <h1 className="title">yourfitnesspal</h1>
+          <h1 className="title">YourFitnessPal</h1>
         </Link>
         </div>
  
@@ -29,9 +29,9 @@ const Navbar = () => {
             </div>
           )}
           {!user && (
-            <div>
-              <Link  to="/login">Login</Link>
-              <Link to="/signup">Signup</Link>
+            <div className="top-right">
+              <Link className="heading-box" to="/login">Login</Link>
+              <Link className="heading-box" to="/signup">Signup</Link>
             </div>
           )}
         

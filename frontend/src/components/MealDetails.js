@@ -102,9 +102,10 @@ const MealDetails = ({ meal }) => {
       {/* <h4>{meal.mealName}</h4> */}
       {editMode ? (
         <form>
-          <label className="label"> Meal:</label>
+          <div className="edit-form">
+          <label className=""> Meal:</label>
           <input
-          className="box" 
+          // className="box" 
             type="text"
             value={editedMeal.mealName}
             onChange={(e) => {
@@ -122,9 +123,9 @@ const MealDetails = ({ meal }) => {
             // }
           />
 
-          <label className="label"> Protein:</label>
+          <label className=""> Protein:</label>
           <input
-             className="box" 
+            //  className="box" 
             type="number"
             value={editedMeal.protein}
             onChange={(e) => {
@@ -136,9 +137,9 @@ const MealDetails = ({ meal }) => {
               console.log("Edited Meal:", editedMeal);
             }}
           />
-          <label className="label">  Carbs:</label>
+          <label className="">  Carbs:</label>
           <input
-             className="box" 
+            //  className="box" 
             type="number"
             value={editedMeal.carbs}
             onChange={(e) => {
@@ -151,9 +152,9 @@ const MealDetails = ({ meal }) => {
             }}
           />
 
-<label className="label">  Fats:</label>
+<label className="">  Fats:</label>
           <input
-             className="box" 
+            //  className="box" 
             type="number"
             value={editedMeal.fats}
             onChange={(e) => {
@@ -165,9 +166,11 @@ const MealDetails = ({ meal }) => {
               console.log("Edited Meal:", editedMeal);
             }}
           />
-          {/* Add input fields for load, reps, and other properties */}
-          <button onClick={handleSubmit}>Save</button>
-          <button onClick={handleCancelEdit}>Cancel</button>
+          <div className="edit-btn">{/* Add input fields for load, reps, and other properties */}
+          <button className="btn" onClick={handleSubmit}>Save</button>
+          <button className="btn" onClick={handleCancelEdit}>Cancel</button>
+          </div>
+          </div>
         </form>
       ) : (
         <>
