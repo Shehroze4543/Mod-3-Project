@@ -11,9 +11,10 @@ const Home = () => {
   useEffect(() => {
     const fetchMeals = async () => {
       const response = await fetch("/api/meals", {
+     
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
+          "Authorization":  `Bearer ${user.token}`,
         },
       });
 
@@ -23,13 +24,38 @@ const Home = () => {
         // setMeals(json);
         dispatch({ type: "SET_MEALS", payload: json });
       }
+    
     };
     if (user) {
       fetchMeals();
     }
-  }, [dispatch, user]);
+  }, [dispatch, meals, user]);
+
+
+  // useEffect(() => {
+  //   const updateMeals = async () => {
+  //     const response = await fetch("/api/meals", {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization":  `Bearer ${user.token}`,
+  //       },
+  //     });
+
+  //     const json = await response.json();
+
+  //     if (response.ok) {
+  //       // setMeals(json);
+  //       dispatch({ type: "UPDATE_MEAL", payload: json });
+  //     }
+    
+  //   };
+    
+  //     updateMeals();
+  
+  // }, [dispatch, meals]);
   return (
-    <>
+   
       <div className="home">
         <div className="workouts">
           {meals &&
@@ -39,7 +65,7 @@ const Home = () => {
         </div>
         <MealForm />
       </div>
-    </>
+  
   );
 };
 

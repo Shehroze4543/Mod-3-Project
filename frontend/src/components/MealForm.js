@@ -50,7 +50,7 @@ const MealForm = () => {
 
   return (
     <form className="create" onSubmit={handleSubmit}>
-      <h3> Add a new meal</h3>
+      <h3 className="heading-box"> ADD A NEW MEAL</h3>
       <label>Meal:</label>
       <input
         type="text"
@@ -79,7 +79,7 @@ const MealForm = () => {
         value={fats}
         className={emptyFields?.includes("Fats") ? "error" : ""}
       />
-      <button>Add Meal</button>
+      <button className="btn meal">Add Meal</button>
       {error && <div className="error">{error}</div>}
     </form>
   );

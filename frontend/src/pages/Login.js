@@ -13,8 +13,9 @@ const Login = () => {
   }
 
   return (
+      <>
     <form className="login" onSubmit={handleSubmit}>
-      <h3>Log In</h3>
+    <div className="user-forms">
       
       <label>Email address:</label>
       <input 
@@ -29,9 +30,10 @@ const Login = () => {
         value={password} 
       />
 
-      <button disabled={isLoading}>Log in</button>
-      {error && <div className="error">{error}</div>}
+      <button className="btn" disabled={isLoading}>Log in</button>
+      {error && <div className="error">{error}</div>}</div>
     </form>
+    </>
   )
 }
 

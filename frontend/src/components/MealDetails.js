@@ -61,7 +61,7 @@ const MealDetails = ({ meal }) => {
     const response = await fetch("/api/meals/" + meal._id, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        'Authorization': `Bearer ${user.token}`,
       },
     });
     const json = await response.json();
@@ -77,7 +77,7 @@ const MealDetails = ({ meal }) => {
         method: "PATCH", // Use PATCH method for updating
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
+          Authorization:  `Bearer ${user.token}`,
         },
         body: JSON.stringify(editedMeal), // Send the edited workout data
       });
@@ -102,8 +102,9 @@ const MealDetails = ({ meal }) => {
       {/* <h4>{meal.mealName}</h4> */}
       {editMode ? (
         <form>
-          <label> Name:</label>
+          <label className="label"> Meal:</label>
           <input
+          className="box" 
             type="text"
             value={editedMeal.mealName}
             onChange={(e) => {
@@ -121,8 +122,9 @@ const MealDetails = ({ meal }) => {
             // }
           />
 
-          <label> Protein:</label>
+          <label className="label"> Protein:</label>
           <input
+             className="box" 
             type="number"
             value={editedMeal.protein}
             onChange={(e) => {
@@ -134,8 +136,9 @@ const MealDetails = ({ meal }) => {
               console.log("Edited Meal:", editedMeal);
             }}
           />
-          <label> Carbs:</label>
+          <label className="label">  Carbs:</label>
           <input
+             className="box" 
             type="number"
             value={editedMeal.carbs}
             onChange={(e) => {
@@ -148,8 +151,9 @@ const MealDetails = ({ meal }) => {
             }}
           />
 
-          <label> Fats:</label>
+<label className="label">  Fats:</label>
           <input
+             className="box" 
             type="number"
             value={editedMeal.fats}
             onChange={(e) => {
@@ -167,9 +171,13 @@ const MealDetails = ({ meal }) => {
         </form>
       ) : (
         <>
+        <div className="meal-display">
+         <div className="display-heading ">
           <h4>{meal.mealName}</h4>
-          <p>
-            <strong>Protein (g):</strong>
+          </div>
+     
+          <div className="display-main ">
+          <p> <strong>Protein (g):</strong>
             {meal.protein}
           </p>
           <p>
@@ -180,14 +188,18 @@ const MealDetails = ({ meal }) => {
             <strong>Fats (g):</strong>
             {meal.fats}
           </p>
+          </div>
+          <div className="display-cal">
           <p>
             <strong>Total Calories:</strong>
             {meal.calories}
           </p>
-
-          <button onClick={handleClick}>delete</button>
-          <button onClick={handleEdit}>EDIT</button>
-        </>
+          </div>
+          <div className="display-btn ">
+          <button className="btn" onClick={handleClick}>Delete</button>
+          <button className="btn" onClick={handleEdit}>EDIT</button>
+          </div>
+          </div>  </>
       )}
     </div>
   );

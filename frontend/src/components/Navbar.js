@@ -11,26 +11,33 @@ const Navbar = () => {
   };
 
   return (
-    <header>
-      <div className="container">
-        <Link to="/">
-          <h1>Calorie tracker</h1>
+    <header className="header">
+   
+        <div className="header1"> 
+          <Link to="/">
+          <h1 className="title">yourfitnesspal</h1>
         </Link>
-        <nav>
+        </div>
+ 
+     
+       
+        <div className="header2">  
           {user && (
-            <div>
-              <span>{user.email}</span>
-              <button onClick={handleClick}>Log out</button>
+            <div className="top-right">
+              <span className="heading-box">Hello, {user.email.split('@')[0]}</span>
+              <button className="btn" onClick={handleClick}>Log out</button>
             </div>
           )}
           {!user && (
             <div>
-              <Link to="/login">Login</Link>
+              <Link  to="/login">Login</Link>
               <Link to="/signup">Signup</Link>
             </div>
           )}
-        </nav>
-      </div>
+        
+        </div>
+      
+     
     </header>
   );
 };
