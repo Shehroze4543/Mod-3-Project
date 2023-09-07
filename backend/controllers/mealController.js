@@ -6,7 +6,8 @@ function calculateTotalCalories(protein, carbs, fats) {
 }
 
 const getMeals = async (req, res) => {
-  const meals = await Meal.find({}).sort({ createdAt: -1 });
+  const user_id = req.user._id;
+  const meals = await Meal.find({ user_id }).sort({ createdAt: -1 });
 
   res.status(200).json(meals);
 };
@@ -27,8 +28,6 @@ const getMeal = async (req, res) => {
 
 // create a meal
 const createMeal = async (req, res) => {
-  // Function to calculate total calories
-
   const { mealName, protein, carbs, fats } = req.body;
   const calories = calculateTotalCalories(protein, carbs, fats);
 
@@ -52,12 +51,14 @@ const createMeal = async (req, res) => {
   }
 
   try {
+    const user_id = req.user._id;
     const meal = await Meal.create({
       mealName,
       protein,
       carbs,
       fats,
       calories,
+      user_id,
     });
 
     res.status(200).json({ meal });
@@ -88,7 +89,7 @@ const updateMeal = async (req, res) => {
     return res.status(404).json({ error: "No Such Meal" });
   }
   try {
-    const meal = await Meal.findById(id);
+    const meal = await Meal.findByIdAndUpdate(id);
 
     if (!meal) {
       return res.status(404).json({ error: "No such Meal" });

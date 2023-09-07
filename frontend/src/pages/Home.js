@@ -11,7 +11,10 @@ const Home = () => {
   useEffect(() => {
     const fetchMeals = async () => {
       const response = await fetch("/api/meals", {
-        headers: { Authorization: `Bearer ${user.token}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
       });
 
       const json = await response.json();
@@ -24,7 +27,7 @@ const Home = () => {
     if (user) {
       fetchMeals();
     }
-  }, [dispatch, meals, user]);
+  }, [dispatch, user]);
   return (
     <>
       <div className="home">
