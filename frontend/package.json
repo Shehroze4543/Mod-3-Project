@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:3080",
+  "proxy": "https://mern-full-stack-application.onrender.com",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
