@@ -12,7 +12,8 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://mern-full-stack-application.onrender.com",
+    origin:
+      "https://6514dd919572b83422dd0ee6--thriving-sunflower-05b482.netlify.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
