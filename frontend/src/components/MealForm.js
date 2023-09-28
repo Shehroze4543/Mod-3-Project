@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useMealsContext } from "../hooks/useMealsContext";
-import { useAuthContext } from "../hooks/useAuthContext";
+import {useState} from "react";
+import {useMealsContext} from "../hooks/useMealsContext";
+import {useAuthContext} from "../hooks/useAuthContext";
 
 const MealForm = () => {
-  const { dispatch } = useMealsContext();
-  const { user } = useAuthContext();
+  const {dispatch} = useMealsContext();
+  const {user} = useAuthContext();
   const [mealName, setMealName] = useState("");
   const [protein, setProtein] = useState("");
   const [carbs, setCarbs] = useState("");
@@ -20,15 +20,18 @@ const MealForm = () => {
       return;
     }
 
-    const meal = { mealName, protein, carbs, fats };
-    const response = await fetch("/api/meals", {
-      method: "POST",
-      body: JSON.stringify(meal),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
+    const meal = {mealName, protein, carbs, fats};
+    const response = await fetch(
+      "https://mern-full-stack-application.onrender.com/api/meals",
+      {
+        method: "POST",
+        body: JSON.stringify(meal),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);
@@ -44,7 +47,7 @@ const MealForm = () => {
       setFats("");
       setEmptyFields([]);
       console.log("NEW MEAL ADDED", json);
-      dispatch({ type: "CREATE_MEAL", payload: json });
+      dispatch({type: "CREATE_MEAL", payload: json});
     }
   };
 

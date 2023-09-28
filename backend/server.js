@@ -12,8 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin:
-      "https://6514dd919572b83422dd0ee6--thriving-sunflower-05b482.netlify.app",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
