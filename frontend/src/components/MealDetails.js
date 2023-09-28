@@ -1,10 +1,10 @@
-import { useMealsContext } from "../hooks/useMealsContext";
-import { useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
+import {useMealsContext} from "../hooks/useMealsContext";
+import {useState} from "react";
+import {useAuthContext} from "../hooks/useAuthContext";
 
-const MealDetails = ({ meal }) => {
-  const { dispatch } = useMealsContext();
-  const { user } = useAuthContext();
+const MealDetails = ({meal}) => {
+  const {dispatch} = useMealsContext();
+  const {user} = useAuthContext();
   const [editMode, setEditMode] = useState(false);
   const [editedMeal, setEditedMeal] = useState(meal);
 
@@ -17,14 +17,18 @@ const MealDetails = ({ meal }) => {
     setEditMode(true);
 
     try {
-      const response = await fetch("/api/meals/" + meal._id, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`, // Include the token in the headers
-        },
-        body: JSON.stringify(editedMeal),
-      });
+      const response = await fetch(
+        "https://mern-full-stack-application.onrender.com/api/meals/" +
+          meal._id,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`, // Include the token in the headers
+          },
+          body: JSON.stringify(editedMeal),
+        }
+      );
       console.log(editedMeal);
 
       if (!response.ok) {
@@ -36,7 +40,7 @@ const MealDetails = ({ meal }) => {
       const json = await response.json();
       if (response.ok) {
         console.log("Response GOOD");
-        dispatch({ type: "UPDATE_MEAL", payload: json });
+        dispatch({type: "UPDATE_MEAL", payload: json});
         //setEditMode(false); // Switch back to view mode after successful update
         setEditMode(true);
       }
@@ -58,29 +62,36 @@ const MealDetails = ({ meal }) => {
     if (!user) {
       return;
     }
-    const response = await fetch("/api/meals/" + meal._id, {
-      method: "DELETE",
-      headers: {
-        'Authorization': `Bearer ${user.token}`,
-      },
-    });
+    const response = await fetch(
+      "https://mern-full-stack-application.onrender.com/api/meals/" + meal._id,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
     const json = await response.json();
 
     if (response.ok) {
-      dispatch({ type: "DELETE_MEAL", payload: json });
+      dispatch({type: "DELETE_MEAL", payload: json});
     }
   };
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("/api/meals/" + meal._id, {
-        method: "PATCH", // Use PATCH method for updating
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:  `Bearer ${user.token}`,
-        },
-        body: JSON.stringify(editedMeal), // Send the edited workout data
-      });
+      const response = await fetch(
+        "https://mern-full-stack-application.onrender.com/api/meals/" +
+          meal._id,
+        {
+          method: "PATCH", // Use PATCH method for updating
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify(editedMeal), // Send the edited workout data
+        }
+      );
       if (!response.ok) {
         // Handle server errors or non-JSON responses here
         console.error("Update failed with status:", response.status);
@@ -89,7 +100,7 @@ const MealDetails = ({ meal }) => {
       const json = await response.json();
       if (response.ok) {
         console.log("Response is ok");
-        dispatch({ type: "UPDATE_MEAL", payload: json });
+        dispatch({type: "UPDATE_MEAL", payload: json});
         setEditMode(true); // Switch back to view mode after successful update
       }
     } catch (error) {
@@ -103,106 +114,118 @@ const MealDetails = ({ meal }) => {
       {editMode ? (
         <form>
           <div className="edit-form">
-          <label className=""> Meal:</label>
-          <input
-          // className="box" 
-            type="text"
-            value={editedMeal.mealName}
-            onChange={(e) => {
-              const newValue = e.target.value;
-              setEditedMeal((prevState) => ({
-                ...prevState,
-                mealName: newValue,
-              }));
-              console.log("Edited Meal:", editedMeal);
-            }}
-            // onChange={(e) =>
-            //   console.log(
-            //     setEditedMeal({ ...editedMeal, mealName: e.target.value })
-            //   )
-            // }
-          />
+            <label className=""> Meal:</label>
+            <input
+              // className="box"
+              type="text"
+              value={editedMeal.mealName}
+              onChange={(e) => {
+                const newValue = e.target.value;
+                setEditedMeal((prevState) => ({
+                  ...prevState,
+                  mealName: newValue,
+                }));
+                console.log("Edited Meal:", editedMeal);
+              }}
+              // onChange={(e) =>
+              //   console.log(
+              //     setEditedMeal({ ...editedMeal, mealName: e.target.value })
+              //   )
+              // }
+            />
 
-          <label className=""> Protein:</label>
-          <input
-            //  className="box" 
-            type="number"
-            value={editedMeal.protein}
-            onChange={(e) => {
-              const newValue = e.target.value;
-              setEditedMeal((prevState) => ({
-                ...prevState,
-                protein: newValue,
-              }));
-              console.log("Edited Meal:", editedMeal);
-            }}
-          />
-          <label className="">  Carbs:</label>
-          <input
-            //  className="box" 
-            type="number"
-            value={editedMeal.carbs}
-            onChange={(e) => {
-              const newValue = e.target.value;
-              setEditedMeal((prevState) => ({
-                ...prevState,
-                carbs: newValue,
-              }));
-              console.log("Edited Meal:", editedMeal);
-            }}
-          />
+            <label className=""> Protein:</label>
+            <input
+              //  className="box"
+              type="number"
+              value={editedMeal.protein}
+              onChange={(e) => {
+                const newValue = e.target.value;
+                setEditedMeal((prevState) => ({
+                  ...prevState,
+                  protein: newValue,
+                }));
+                console.log("Edited Meal:", editedMeal);
+              }}
+            />
+            <label className=""> Carbs:</label>
+            <input
+              //  className="box"
+              type="number"
+              value={editedMeal.carbs}
+              onChange={(e) => {
+                const newValue = e.target.value;
+                setEditedMeal((prevState) => ({
+                  ...prevState,
+                  carbs: newValue,
+                }));
+                console.log("Edited Meal:", editedMeal);
+              }}
+            />
 
-<label className="">  Fats:</label>
-          <input
-            //  className="box" 
-            type="number"
-            value={editedMeal.fats}
-            onChange={(e) => {
-              const newValue = e.target.value;
-              setEditedMeal((prevState) => ({
-                ...prevState,
-                fats: newValue,
-              }));
-              console.log("Edited Meal:", editedMeal);
-            }}
-          />
-          <div className="edit-btn">{/* Add input fields for load, reps, and other properties */}
-          <button className="btn" onClick={handleSubmit}>Save</button>
-          <button className="btn" onClick={handleCancelEdit}>Cancel</button>
-          </div>
+            <label className=""> Fats:</label>
+            <input
+              //  className="box"
+              type="number"
+              value={editedMeal.fats}
+              onChange={(e) => {
+                const newValue = e.target.value;
+                setEditedMeal((prevState) => ({
+                  ...prevState,
+                  fats: newValue,
+                }));
+                console.log("Edited Meal:", editedMeal);
+              }}
+            />
+            <div className="edit-btn">
+              {/* Add input fields for load, reps, and other properties */}
+              <button className="btn" onClick={handleSubmit}>
+                Save
+              </button>
+              <button className="btn" onClick={handleCancelEdit}>
+                Cancel
+              </button>
+            </div>
           </div>
         </form>
       ) : (
         <>
-        <div className="meal-display">
-         <div className="display-heading ">
-          <h4>{meal.mealName}</h4>
-          </div>
-     
-          <div className="display-main ">
-          <p> <strong>Protein (g):</strong>
-            {meal.protein}
-          </p>
-          <p>
-            <strong>Carbs (g):</strong>
-            {meal.carbs}
-          </p>
-          <p>
-            <strong>Fats (g):</strong>
-            {meal.fats}
-          </p>
-          </div>
-          <div className="display-cal">
-          <p>
-            <strong>Total Calories:</strong>
-            {meal.calories}
-          </p>
-          </div>
-          <div className="display-btn ">
-          <button className="btn" onClick={handleClick}>Delete</button>
-          <button className="btn" onClick={handleEdit}>EDIT</button>
-          </div>
-          </div>  </>
+          <div className="meal-display">
+            <div className="display-heading ">
+              <h4>{meal.mealName}</h4>
+            </div>
+
+            <div className="display-main ">
+              <p>
+                {" "}
+                <strong>Protein (g):</strong>
+                {meal.protein}
+              </p>
+              <p>
+                <strong>Carbs (g):</strong>
+                {meal.carbs}
+              </p>
+              <p>
+                <strong>Fats (g):</strong>
+                {meal.fats}
+              </p>
+            </div>
+            <div className="display-cal">
+              <p>
+                <strong>Total Calories:</strong>
+                {meal.calories}
+              </p>
+            </div>
+            <div className="display-btn ">
+              <button className="btn" onClick={handleClick}>
+                Delete
+              </button>
+              <button className="btn" onClick={handleEdit}>
+                EDIT
+              </button>
+            </div>
+          </div>{" "}
+        </>
       )}
     </div>
   );
